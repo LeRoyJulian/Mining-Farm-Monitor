@@ -119,7 +119,6 @@ export default {
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
-               console.log(self.json);
 					setTimeout(function(){ self.getJSON() }, 5000);
 				})
 				.catch(function (error) {
@@ -149,7 +148,7 @@ export default {
 			} else {
 			    language = window.navigator.userLanguage || window.navigator.language;
 			}
-			moment.locale(language);
+			moment.locale(language.substring(0,2));
 			return moment.unix(timestamp).fromNow() ;
 		}
   }
@@ -191,7 +190,7 @@ a { color: #42b983; }
 .workers { display: flex; align-items: center; justify-content: space-around; text-align: left; flex-flow: row wrap; }
 .workers .worker > div { float: left; white-space: nowrap; overflow: hidden;}
 .workers .fa-server { vertical-align: middle; margin-right: 15px; float: left; }
-.workers small { color: #3f3f3f; font-size: 11px; }
+.workers small { color: #3f3f3f; font-size: 10px; }
 .workers .worker { flex: 0 1 33.3%; margin-top: 15px; text-transform: uppercase; }
 .workers .worker:nth-child(-n+3) { margin-top: 0; }
 
