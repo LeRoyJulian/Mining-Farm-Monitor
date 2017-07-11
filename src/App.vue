@@ -143,7 +143,13 @@ export default {
          this.lastAlert = moment().unix();
 		},
 		dateFormated(timestamp) {
-			moment.locale('fr');
+			var language;
+			if (window.navigator.languages) {
+			    language = window.navigator.languages[0];
+			} else {
+			    language = window.navigator.userLanguage || window.navigator.language;
+			}
+			moment.locale(language);
 			return moment.unix(timestamp).fromNow() ;
 		}
   }
@@ -168,7 +174,7 @@ body {padding: 0; margin: 0; }
   margin: 0;
 }
 
-.container-fluid { max-width: 640px; }
+.container-fluid { max-width: 680px; }
 
 h1 { margin-top: 0; }
 h2 { margin-bottom: 45px; }
@@ -183,7 +189,7 @@ a { color: #42b983; }
 .panel-body p:last-of-type { margin-bottom: 0; }
 
 .workers { display: flex; align-items: center; justify-content: space-around; text-align: left; flex-flow: row wrap; }
-.workers .worker > div { float: left; }
+.workers .worker > div { float: left; white-space: nowrap; overflow: hidden;}
 .workers .fa-server { vertical-align: middle; margin-right: 15px; float: left; }
 .workers small { color: #3f3f3f; font-size: 11px; }
 .workers .worker { flex: 0 1 33.3%; margin-top: 15px; text-transform: uppercase; }
