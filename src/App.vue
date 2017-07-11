@@ -120,7 +120,7 @@ export default {
 	  getJSON() {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/ethpool.php')
+			axios.get('/ethpool.json')
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
@@ -142,7 +142,7 @@ export default {
 			}
 		},
 		alertWorkerOffline() {
-         var audio = new Audio('./static/210-game-over.mp3');
+         var audio = new Audio('./210-game-over.mp3');
          audio.play();
          this.lastAlert = moment().unix();
 		},
@@ -195,7 +195,7 @@ a { color: #42b983; }
 .workers { display: flex; align-items: center; justify-content: center; text-align: left; flex-flow: row wrap; }
 .workers .worker {text-transform: uppercase; padding: 10px; }
 .workers .worker > div { float: left; white-space: nowrap; overflow: hidden;}
-.workers .worker .fa-server { vertical-align: middle; margin-right: 15px; float: left; font-size: 56px; }
+.workers .worker .fa-server { vertical-align: middle; margin-right: 15px; float: left; font-size: 57px; }
 .workers .worker .name { margin-bottom: 3px; }
 .workers .worker .hashrate { font-size: 11px; line-height: 1;}
 .workers .worker small { color: #3f3f3f; font-size: 10px; line-height: 1;}
