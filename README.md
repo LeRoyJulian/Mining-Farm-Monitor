@@ -1,6 +1,7 @@
 # Mining-Farm-Monitor
 
 > A monitoring app for your workers.
+[DEMO](https://monitor.blockchainvest.io)
 
 ## Configuration
 
