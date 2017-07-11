@@ -1,0 +1,1 @@
+<?php echo file_get_contents('http://ethpool.org/api/miner_new/a8cCce14A61453a317F3D867a1c4c11CF75EFBD7'); ?>
