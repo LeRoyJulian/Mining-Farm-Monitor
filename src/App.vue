@@ -60,7 +60,12 @@
 			<div class="panel panel-default">
 				<div class="panel-body workers">
 					<div class="worker" v-for="worker in json.workers">
-						<i class="fa fa-3x fa-server"></i><div><b><i class="fa fa-circle" :class="isWorkerActive(worker.workerLastSubmitTime)"></i> {{ worker.worker }}</b><br /><small>{{ dateFormated(worker.workerLastSubmitTime) }}</small></div>
+						<div><i class="fa fa-server"></i></div>
+						<div>
+							<div class="name"><b><i class="fa fa-circle" :class="isWorkerActive(worker.workerLastSubmitTime)"></i> {{ worker.worker }}</b></div>
+							<div class="hashrate"><i class="fa fa-bolt fa-fw"></i> {{ worker.hashrate }}</div>
+							<small><i class="fa fa-clock-o fa-fw"></i> {{ dateFormated(worker.workerLastSubmitTime) }}</small>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -187,12 +192,13 @@ a { color: #42b983; }
 .container-fluid > .panel:last-of-type { margin-bottom: 0; }
 .panel-body p:last-of-type { margin-bottom: 0; }
 
-.workers { display: flex; align-items: center; justify-content: space-around; text-align: left; flex-flow: row wrap; }
+.workers { display: flex; align-items: center; justify-content: center; text-align: left; flex-flow: row wrap; }
+.workers .worker {text-transform: uppercase; padding: 10px; }
 .workers .worker > div { float: left; white-space: nowrap; overflow: hidden;}
-.workers .fa-server { vertical-align: middle; margin-right: 15px; float: left; }
-.workers small { color: #3f3f3f; font-size: 10px; }
-.workers .worker { flex: 0 1 33.3%; margin-top: 15px; text-transform: uppercase; }
-.workers .worker:nth-child(-n+3) { margin-top: 0; }
+.workers .worker .fa-server { vertical-align: middle; margin-right: 15px; float: left; font-size: 56px; }
+.workers .worker .name { margin-bottom: 3px; }
+.workers .worker .hashrate { font-size: 11px; line-height: 1;}
+.workers .worker small { color: #3f3f3f; font-size: 10px; line-height: 1;}
 
 @media (max-width: 767px) {
 	#app { height: auto; }
