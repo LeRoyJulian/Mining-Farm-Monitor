@@ -142,7 +142,7 @@ export default {
 			}
 		},
 		alertWorkerOffline() {
-         var audio = new Audio('./210-game-over.mp3');
+         var audio = new Audio('./static/210-game-over.mp3');
          audio.play();
          this.lastAlert = moment().unix();
 		},
