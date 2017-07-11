@@ -120,7 +120,7 @@ export default {
 	  getJSON() {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/ethpool.json')
+			axios.get('/ethpool.php')
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
