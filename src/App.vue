@@ -120,7 +120,7 @@ export default {
 	  getJSON() {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/ethpool.php')
+			axios.get('/ethpool.json')
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
@@ -142,7 +142,7 @@ export default {
 			}
 		},
 		alertWorkerOffline() {
-         var audio = new Audio('./static/210-game-over.mp3');
+         var audio = new Audio('/static/210-game-over.mp3');
          audio.play();
          this.lastAlert = moment().unix();
 		},
