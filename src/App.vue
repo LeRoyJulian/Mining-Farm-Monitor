@@ -163,7 +163,7 @@ body {padding: 0; margin: 0; }
   padding: 45px 0px;
   background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, rgba(0,0,0,0.15) 100%), radial-gradient(at top center, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.40) 120%) #989898;
   background-blend-mode: multiply,multiply;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
   margin: 0;
 }
@@ -182,10 +182,12 @@ a { color: #42b983; }
 .container-fluid > .panel:last-of-type { margin-bottom: 0; }
 .panel-body p:last-of-type { margin-bottom: 0; }
 
-.workers { display: flex; align-items: center; justify-content: space-around; text-align: left; }
+.workers { display: flex; align-items: center; justify-content: space-around; text-align: left; flex-flow: row wrap; }
 .workers .worker > div { float: left; }
 .workers .fa-server { vertical-align: middle; margin-right: 15px; float: left; }
-.workers small { color: #3f3f3f; text-transform: uppercase; font-size: 11px; }
+.workers small { color: #3f3f3f; font-size: 11px; }
+.workers .worker { flex: 0 1 33.3%; margin-top: 15px; text-transform: uppercase; }
+.workers .worker:nth-child(-n+3) { margin-top: 0; }
 
 @media (max-width: 767px) {
 	#app { height: auto; }
