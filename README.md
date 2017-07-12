@@ -7,9 +7,8 @@
 ## Configuration
 
 You'll need PHP to make this working. If you find a way to retrieve Ethpool's JSON without CORS error, let me know !  
-Works only with Ethpool and Nanopool currently, but going to be improved for Ethermine.  
-Ethpool : Edit /pool.php and replace with your wallet address (without 0x).  
-Nanopool : Edit /pool.php and replace with your JSON's URL.
+Works only with Ethpool currently, but going to be improved for Ethermine and Nanopool soon.  
+Edit config.json and replace with your wallet address (without 0x).  
 
 
 ## Build Setup
