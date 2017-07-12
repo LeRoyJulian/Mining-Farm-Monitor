@@ -5,7 +5,7 @@
 			<h2><b>{{ json.hashRate }}</b></h2>
 			<div class="row indicators">
 				<div class="col-sm-4">
-					<div class="panel panel-default">
+					<div class="panel panel-default" v-if="this.pool == 'ethpool'">
 						<div class="panel-body">
 							{{ this.json.totalShareStats.valid }}
 						</div>
@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div class="panel panel-default">
+					<div class="panel panel-default" v-if="this.pool == 'ethpool'">
 						<div class="panel-body">
 							{{ (this.json.ethPerMin * 60).toFixed(6) }}
 						</div>
@@ -25,7 +25,7 @@
 					</div>
 				</div>
 				<div class="col-sm-4">
-					<div class="panel panel-default">
+					<div class="panel panel-default" v-if="this.pool == 'ethpool'">
 						<div class="panel-body">
 							{{ (this.json.ethPerMin * 60 * 24).toFixed(6) }}
 						</div>
@@ -37,7 +37,7 @@
 			</div>
 			<div class="row indicators">
 				<div class="col-sm-6">
-					<div class="panel panel-default">
+					<div class="panel panel-default" v-if="this.pool == 'ethpool'">
 						<div class="panel-body">
 							{{ this.json.credits[0].credit / 1000000000000 }}<sup>T</sup>
 						</div>
@@ -45,26 +45,52 @@
 							Credits
 						</div>
 					</div>
+					<div class="panel panel-default" v-if="this.pool == 'nanopool'">
+						<div class="panel-body">
+							{{ this.json.balance }}
+						</div>
+						<div class="panel-footer">
+							Balance
+						</div>
+					</div>
 				</div>
 				<div class="col-sm-6">
-					<div class="panel panel-default">
+					<div class="panel panel-default" v-if="this.pool == 'ethpool'">
 						<div class="panel-body">
 							{{ this.daysBeforeReward }}
 						</div>
 						<div class="panel-footer">
-							Days Before Next Reward
+							Days Before Reward
+						</div>
+					</div>
+					<div class="panel panel-default" v-if="this.pool == 'nanopool'">
+						<div class="panel-body">
+							{{ this.json.unconfirmed_balance }}
+						</div>
+						<div class="panel-footer">
+							Unconfirmed Balance
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class="panel panel-default">
-				<div class="panel-body workers">
+				<div class="panel-body workers" v-if="this.pool == 'ethpool'">
 					<div class="worker" v-for="worker in json.workers">
 						<div><i class="fa fa-server"></i></div>
 						<div>
 							<div class="name"><b><i class="fa fa-circle" :class="isWorkerActive(worker.workerLastSubmitTime)"></i> {{ worker.worker }}</b></div>
 							<div class="hashrate"><i class="fa fa-bolt fa-fw"></i> {{ worker.hashrate }}</div>
 							<small><i class="fa fa-clock-o fa-fw"></i> {{ dateFormated(worker.workerLastSubmitTime) }}</small>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body workers" v-if="this.pool == 'nanopool'">
+					<div class="worker" v-for="worker in json.workers">
+						<div><i class="fa fa-server"></i></div>
+						<div>
+							<div class="name"><b><i class="fa fa-circle" :class="isWorkerActive(worker.lastShare)"></i> {{ worker.id }}</b></div>
+							<div class="hashrate"><i class="fa fa-bolt fa-fw"></i> {{ worker.hashrate }}</div>
+							<small><i class="fa fa-clock-o fa-fw"></i> {{ dateFormated(worker.lastShare) }}</small>
 						</div>
 					</div>
 				</div>
@@ -89,20 +115,9 @@ export default {
   name: 'app',
 	data: function () {
 		return {
+			'pool': 'nanopool',
 			'lastAlert': 0,
-			'json': {
-				'address': '',
-				'ethPerMin': 0,
-				'workers': {},
-				'totalShareStats': {
-					'valid': 0
-				},
-				'credits': [
-					{
-						'credit' : 0
-					}
-				]
-			}
+			'json': { }
 		}
 	},
 	computed: {
@@ -110,17 +125,19 @@ export default {
 			return 'https://etherchain.org/account/0x' + this.json.address
 		},
 		daysBeforeReward: function() {
-			return ((this.json.credits[0].maxCredit - this.json.credits[0].credit) / (this.json.totalShareStats.valid * 4000000000000) * 24).toFixed(2)
+			if (this.pool == 'ethpool') {
+				return ((this.json.credits[0].maxCredit - this.json.credits[0].credit) / (this.json.totalShareStats.valid * 4000000000000) * 24).toFixed(2)
+			}
 		}
 	},
 	created() {
-		this.getJSON();
+		this.getJSON(this.pool);
   },
   methods: {
-	  getJSON() {
+	  getJSON(pool) {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/ethpool.php')
+			axios.get('/pool.json')
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
