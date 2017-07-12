@@ -116,6 +116,7 @@ export default {
 	data: function () {
 		return {
 			'pool': 'ethpool',
+			'wallet': 'a8cCce14A61453a317F3D867a1c4c11CF75EFBD7',
 			'lastAlert': 0,
 			'json': { }
 		}
@@ -131,13 +132,16 @@ export default {
 		}
 	},
 	created() {
+		var config = require('../config.json');
+		this.wallet = config.wallet;
+		this.pool = config.pool;
 		this.getJSON(this.pool);
   },
   methods: {
 	  getJSON(pool) {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/pool.php')
+			axios.get('/' + self.pool + '.php?wallet=' + self.wallet)
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
@@ -162,6 +166,15 @@ export default {
          var audio = new Audio('/static/210-game-over.mp3');
          audio.play();
          this.lastAlert = moment().unix();
+		},
+		getParameterByName(name, url) {
+		    if (!url) url = window.location.href;
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
 		},
 		dateFormated(timestamp) {
 			var language;
