@@ -89,7 +89,7 @@
 						<div><i class="fa fa-server"></i></div>
 						<div>
 							<div class="name"><b><i class="fa fa-circle" :class="isWorkerActive(worker.lastShare)"></i> {{ worker.id }}</b></div>
-							<div class="hashrate"><i class="fa fa-bolt fa-fw"></i> {{ worker.hashrate }}</div>
+							<div class="hashrate"><i class="fa fa-bolt fa-fw"></i> {{ worker.hashrate }} MH/s</div>
 							<small><i class="fa fa-clock-o fa-fw"></i> {{ dateFormated(worker.lastShare) }}</small>
 						</div>
 					</div>
