@@ -125,7 +125,7 @@ export default {
 			return 'https://etherchain.org/account/0x' + this.json.address
 		},
 		daysBeforeReward: function() {
-			if (this.pool == 'ethpool') {
+			if (this.pool == 'ethpool' && this.json.totalShareStats) {
 				return ((this.json.credits[0].maxCredit - this.json.credits[0].credit) / (this.json.totalShareStats.valid * 4000000000000) * 24).toFixed(2)
 			}
 		}
