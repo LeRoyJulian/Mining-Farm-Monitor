@@ -18,7 +18,7 @@ Nanopool : Edit /pool.php and replace with your JSON's URL.
 # install dependencies
 npm install
 
-# serve with hot reload at localhost:8080 (doesn't work because of php socket, use ethpool.json for tests)
+# serve with hot reload at localhost:8080 (doesn't work because of needed PHP socket, use pool.json for tests)
 npm run dev
 
 # build for production with minification
