@@ -115,7 +115,7 @@ export default {
   name: 'app',
 	data: function () {
 		return {
-			'pool': 'nanopool',
+			'pool': 'ethpool',
 			'lastAlert': 0,
 			'json': { }
 		}
@@ -137,7 +137,7 @@ export default {
 	  getJSON(pool) {
 			console.log('Fetching...');
 			var self = this;
-			axios.get('/pool.json')
+			axios.get('/pool.php')
 				.then(function (response) {
 					console.log('Fetched!');
 					self.json = response.data;
