@@ -25,4 +25,4 @@ npm run dev
 npm run build
 ```
 
-For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).
+ETH donation : 0x794328e169231b39f36bb60e15b575bd6a38833b
